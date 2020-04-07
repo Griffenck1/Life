@@ -20,7 +20,8 @@ private slots:
 
 private:
     Ui::LifeWindow *ui;
-    QGraphicsScene *scene;
+    QGraphicsScene *life_board_;
+    QGraphicsScene *life_graph_;
 };
 
 #endif // LIFEWINDOW_H

@@ -9,17 +9,29 @@ LifeWindow::LifeWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QGraphicsView * view = ui->cellGraphicsView;
-    scene = new QGraphicsScene;
-    view->setScene(scene);
-    view->setSceneRect(0,0,view->frameSize().width(),view->frameSize().height());
+    //The following lines of code and for loop are used to create the grid that the game is played on
+    QGraphicsView * life_board_view = ui->cellsGraphicsView;
+    life_board_ = new QGraphicsScene;
+    life_board_view->setScene(life_board_);
+    life_board_view->setSceneRect(0,0,life_board_view->frameSize().width(),life_board_view->frameSize().height());
 
     for(int i = 0; i < 21; i++){
-        scene->addLine(i*40, 0, i*40, 400, QPen(QColor(255,255,255)));
+        life_board_->addLine(i*40, 0, i*40, 400, QPen(QColor(255,255,255)));
         if(i < 11){
-            scene->addLine(0, i*40, 800, i*40, QPen(QColor(255,255,255)));
+            life_board_->addLine(0, i*40, 800, i*40, QPen(QColor(255,255,255)));
         }
     }
+
+    //The following line of code are used to create the outline for the graph
+    QGraphicsView * life_graph_view = ui->graphGraphicsView;
+    life_graph_ = new QGraphicsScene;
+    life_graph_view->setScene(life_graph_);
+    life_graph_view->setSceneRect(0, 0, life_graph_view->frameSize().width(), life_graph_view->frameSize().height());
+
+    life_graph_->addLine(0, 0, 800, 0, QPen(QColor(255,255,255)));
+    life_graph_->addLine(0, 100, 800, 100, QPen(QColor(255,255,255)));
+    life_graph_->addLine(0, 0, 0, 100, QPen(QColor(255,255,255)));
+    life_graph_->addLine(800, 0, 800, 100, QPen(QColor(255,255,255)));
 }
 
 LifeWindow::~LifeWindow()

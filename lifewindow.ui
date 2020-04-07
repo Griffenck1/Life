@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>840</width>
-    <height>720</height>
+    <height>650</height>
    </rect>
   </property>
   <property name="palette">
@@ -978,8 +978,8 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>650</y>
-      <width>811</width>
+      <y>580</y>
+      <width>821</width>
       <height>61</height>
      </rect>
     </property>
@@ -1238,7 +1238,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QGraphicsView" name="cellGraphicsView">
+   <widget class="QGraphicsView" name="cellsGraphicsView">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -1255,6 +1255,19 @@
     </property>
     <property name="horizontalScrollBarPolicy">
      <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+   </widget>
+   <widget class="QGraphicsView" name="graphGraphicsView">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>470</y>
+      <width>810</width>
+      <height>110</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
     </property>
    </widget>
   </widget>
