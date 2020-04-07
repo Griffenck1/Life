@@ -6,6 +6,7 @@ LifeWindow::LifeWindow(QWidget *parent) :
     ui(new Ui::LifeWindow)
 {
     ui->setupUi(this);
+    QGraphicsView * view = ui->cellsGraphicsView;
 }
 
 LifeWindow::~LifeWindow()
