@@ -1,6 +1,9 @@
 #ifndef CELL_H
 #define CELL_H
 
+#include <stdio.h> //Random # generation
+#include <stdlib.h> //Random # generation
+#include <time.h> //Random # generation
 #include <QColor>
 #include <QGraphicsItem>
 
@@ -13,6 +16,8 @@ class Cell : public QObject, public QGraphicsItem {
 
         int get_x() const {return x_;}
         int get_y() const {return y_;}
+
+        int get_cell_state() const {return cell_state_;}
 
         QRectF boundingRect() const override;
         QPainterPath shape() const override;

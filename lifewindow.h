@@ -18,10 +18,12 @@ public:
 
 private slots:
 
+
 private:
     Ui::LifeWindow *ui;
-    QGraphicsScene *life_board_;
-    QGraphicsScene *life_graph_;
+    LifeBoard life_board_;
+    QGraphicsScene *life_board_view;
+    QGraphicsScene *life_graph_view;
 
     void PaintLifeBoard(LifeBoard life_board_real);
 };
