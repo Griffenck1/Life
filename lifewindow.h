@@ -2,7 +2,7 @@
 #define LIFEWINDOW_H
 
 #include <QMainWindow>
-#include "cell.h"
+#include "lifeboard.h"
 
 namespace Ui {
 class LifeWindow;
@@ -22,6 +22,8 @@ private:
     Ui::LifeWindow *ui;
     QGraphicsScene *life_board_;
     QGraphicsScene *life_graph_;
+
+    void PaintLifeBoard(LifeBoard life_board_real);
 };
 
 #endif // LIFEWINDOW_H

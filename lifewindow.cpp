@@ -33,10 +33,17 @@ LifeWindow::LifeWindow(QWidget *parent) :
     life_graph_->addLine(0, 0, 0, 100, QPen(QColor(255,255,255)));
     life_graph_->addLine(800, 0, 800, 100, QPen(QColor(255,255,255)));
 
-    QColor c(0, 255, 0);
-    Cell *cell1 = new Cell(c, 0, 0);
 
-    life_board_->addItem(cell1);
+    LifeBoard life_board_real;
+
+    this->PaintLifeBoard(life_board_real);
+
+}
+
+void LifeWindow::PaintLifeBoard(LifeBoard life_board_real){
+    for(Cell *c : life_board_real.get_cells()){
+        life_board_->addItem(c);
+    }
 }
 
 LifeWindow::~LifeWindow()

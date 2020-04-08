@@ -9,12 +9,10 @@ class Cell : public QObject, public QGraphicsItem {
     Q_OBJECT
 
     public:
-        Cell(QColor c, const int x, const int y);
+        Cell(int cell_state, const int x, const int y);
 
         int get_x() const {return x_;}
         int get_y() const {return y_;}
-
-        int get_id() const {return id_;}
 
         QRectF boundingRect() const override;
         QPainterPath shape() const override;
@@ -24,7 +22,7 @@ class Cell : public QObject, public QGraphicsItem {
     private:
         int x_;
         int y_;
-        int id_;
+        int cell_state_;
         QColor color_;
         static const int width_ = 40;
 };

@@ -1,8 +1,14 @@
 #include "cell.h"
 #include <QtWidgets>
 
-Cell::Cell(QColor c, const int x, const int y){
-    color_ = c;
+Cell::Cell(int cell_state, const int x, const int y){
+    cell_state_ = cell_state;
+    if(cell_state_ == 0){
+        color_ = QColor(0, 255, 0);
+    }
+    else{
+        color_ = QColor(0, 0, 0);
+    }
     x_ = x;
     y_ = y;
 }

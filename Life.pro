@@ -26,11 +26,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         lifewindow.cpp \
-    cell.cpp
+    cell.cpp \
+    lifeboard.cpp
 
 HEADERS += \
         lifewindow.h \
-    cell.h
+    cell.h \
+    lifeboard.h
 
 FORMS += \
         lifewindow.ui
