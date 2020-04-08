@@ -30,16 +30,24 @@ LifeWindow::LifeWindow(QWidget *parent) :
     life_graph_view->addLine(800, 0, 800, 100, QPen(QColor(255,255,255)));
 
     //These lines initialize the life_board_ and print it to life_board_view and also set the appropriate labels
-    this->PaintLifeBoard(life_board_);
+    this->PaintLifeBoard();
     ui->turnLabel->setText("Turn: 0");
     ui->populationLabel->setText(life_board_.PopulationAsString());
 
+    connect(ui->stepButton, &QAbstractButton::pressed, this, &LifeWindow::on_stepButton_clicked);
+
 }
 
-void LifeWindow::PaintLifeBoard(LifeBoard life_board_real){
-    for(Cell *c : life_board_real.get_cells()){
+void LifeWindow::PaintLifeBoard(){
+    for(Cell *c : life_board_.get_cells()){
         life_board_view->addItem(c);
     }
+}
+
+void LifeWindow::on_stepButton_clicked(){
+    life_board_.TakeStep();
+    ui->populationLabel->setText(life_board_.PopulationAsString());
+    qDebug() << "step!";
 }
 
 LifeWindow::~LifeWindow()

@@ -17,6 +17,7 @@ public:
     ~LifeWindow();
 
 private slots:
+    void on_stepButton_clicked();
 
 
 private:
@@ -25,7 +26,7 @@ private:
     QGraphicsScene *life_board_view;
     QGraphicsScene *life_graph_view;
 
-    void PaintLifeBoard(LifeBoard life_board_real);
+    void PaintLifeBoard();
 };
 
 #endif // LIFEWINDOW_H

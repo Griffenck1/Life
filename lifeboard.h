@@ -14,6 +14,10 @@ class LifeBoard{
 
         QString PopulationAsString();
 
+        void PopulateCellNeighbors();
+
+        void TakeStep();
+
     private:
         std::vector<Cell*> cells_;
         int turn_;
