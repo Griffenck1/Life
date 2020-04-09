@@ -34,8 +34,6 @@ LifeWindow::LifeWindow(QWidget *parent) :
     ui->turnLabel->setText("Turn: 0");
     ui->populationLabel->setText(life_board_.PopulationAsString());
 
-    connect(ui->stepButton, &QAbstractButton::pressed, this, &LifeWindow::on_stepButton_clicked);
-
 }
 
 void LifeWindow::PaintLifeBoard(){
@@ -46,8 +44,16 @@ void LifeWindow::PaintLifeBoard(){
 
 void LifeWindow::on_stepButton_clicked(){
     life_board_.TakeStep();
+    std::string s = "Turn: " + std::to_string(life_board_.get_turn());
+    QString qs = s.c_str();
+    ui->turnLabel->setText(qs);
     ui->populationLabel->setText(life_board_.PopulationAsString());
     qDebug() << "step!";
+    for(Cell *c : life_board_.get_cells()[0]->get_neighbors()){
+        std::string s = std::to_string(c->get_x()) + " : " + std::to_string(c->get_y());
+        QString qs = s.c_str();
+        qDebug() << qs;
+    }
 }
 
 LifeWindow::~LifeWindow()

@@ -24,19 +24,20 @@ QString LifeBoard::PopulationAsString(){
     return ("Population: " + std::to_string(alive_count) + " (" + std::to_string((alive_count*100)/800) + "%)").c_str();
 }
 
+//Algorithm doesn't quite work right
 void LifeBoard::PopulateCellNeighbors(){
     int cell_index = 0;
     std::vector<Cell*> neighbors;
     for(Cell *c : cells_){
         neighbors = {};
-        neighbors.push_back(cells_[(((cell_index - (40 + 1))+800)%800)]);
-        neighbors.push_back(cells_[(((cell_index - (40))+800)%800)]);
-        neighbors.push_back(cells_[(((cell_index - (40 - 1))+800)%800)]);
+        neighbors.push_back(cells_[(((cell_index - 41)+800)%800)]);
+        neighbors.push_back(cells_[(((cell_index - 40)+800)%800)]);
+        neighbors.push_back(cells_[(((cell_index - 39)+800)%800)]);
         neighbors.push_back(cells_[(((cell_index - 1)+800)%800)]);
         neighbors.push_back(cells_[(((cell_index + 1)+800)%800)]);
-        neighbors.push_back(cells_[(((cell_index + (40 - 1))+800)%800)]);
-        neighbors.push_back(cells_[(((cell_index + (40))+800)%800)]);
-        neighbors.push_back(cells_[(((cell_index + (40 + 1))+800)%800)]);
+        neighbors.push_back(cells_[(((cell_index + 39)+800)%800)]);
+        neighbors.push_back(cells_[(((cell_index + 40)+800)%800)]);
+        neighbors.push_back(cells_[(((cell_index + 41)+800)%800)]);
         cells_[cell_index]->set_neighbors(neighbors);
         cell_index++;
     }
@@ -69,4 +70,5 @@ void LifeBoard::TakeStep(){
             c->Die();
         }
     }
+    turn_++;
 }
