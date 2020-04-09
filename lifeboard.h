@@ -14,6 +14,8 @@ class LifeBoard{
 
         QString PopulationAsString();
 
+        int PopulationAsPercent();
+
         void PopulateCellNeighbors();
 
         void TakeStep();

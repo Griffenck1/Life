@@ -1,11 +1,7 @@
 #ifndef CELL_H
 #define CELL_H
 
-#include <stdio.h> //Random # generation
-#include <stdlib.h> //Random # generation
-#include <time.h> //Random # generation
-#include <QColor>
-#include <QGraphicsItem>
+#include "graphbar.h"
 
 class Cell : public QObject, public QGraphicsItem {
 

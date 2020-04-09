@@ -2,7 +2,7 @@
 #define LIFEWINDOW_H
 
 #include <QMainWindow>
-#include "lifeboard.h"
+#include "lifegraph.h"
 
 namespace Ui {
 class LifeWindow;

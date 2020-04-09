@@ -27,12 +27,17 @@ SOURCES += \
         main.cpp \
         lifewindow.cpp \
     cell.cpp \
-    lifeboard.cpp
+    lifeboard.cpp \
+    lifegraph.cpp \
+    graphbar.cpp
 
 HEADERS += \
         lifewindow.h \
     cell.h \
-    lifeboard.h
+    lifeboard.h \
+    lifegraph.h \
+    lifegraph.h \
+    graphbar.h
 
 FORMS += \
         lifewindow.ui

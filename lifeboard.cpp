@@ -24,6 +24,16 @@ QString LifeBoard::PopulationAsString(){
     return ("Population: " + std::to_string(alive_count) + " (" + std::to_string((alive_count*100)/800) + "%)").c_str();
 }
 
+int LifeBoard::PopulationAsPercent(){
+    int alive_count = 0;
+    for(Cell *c : cells_){
+        if(c->get_cell_state() == 1){
+            alive_count++;
+        }
+    }
+    return (alive_count*100)/800;
+}
+
 //Algorithm doesn't quite work right
 void LifeBoard::PopulateCellNeighbors(){
     int cell_index = 0;

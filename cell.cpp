@@ -1,5 +1,4 @@
 #include "cell.h"
-#include <QtWidgets>
 
 Cell::Cell(int cell_state, const int x, const int y){
     cell_state_ = cell_state;
