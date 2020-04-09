@@ -23,10 +23,12 @@ private slots:
 private:
     Ui::LifeWindow *ui;
     LifeBoard life_board_;
+    LifeGraph life_graph_;
     QGraphicsScene *life_board_view;
     QGraphicsScene *life_graph_view;
 
     void PaintLifeBoard();
+    void PaintGraphBar(GraphBar *b);
 };
 
 #endif // LIFEWINDOW_H

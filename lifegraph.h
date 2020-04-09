@@ -3,16 +3,19 @@
 
 #include "graphbar.h"
 #include "lifeboard.h"
+#include <deque>
 
 class LifeGraph{
     public:
         LifeGraph();
 
-        std::vector<GraphBar*> get_graph_bars() const {return graph_bars_;}
+        GraphBar* get_last_bar() const {return graph_bars_.back();}
 
-        void Step(int turn);
+        std::deque<GraphBar*> get_graph_bars() const {return graph_bars_;}
+
+        GraphBar* AddBar(int pop_percent);
     private:
-        std::vector<GraphBar*> graph_bars_;
+        std::deque<GraphBar*> graph_bars_;
 };
 
 #endif // LIFEGRAPH_H

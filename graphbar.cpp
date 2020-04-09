@@ -1,14 +1,15 @@
 #include "graphbar.h"
 
-GraphBar::GraphBar(int x, int y, int height){
+GraphBar::GraphBar(int x, int y){
     x_ = x;
-    y_ = y;
-    height_ = height;
+    y_ = 100 - y;
+    height_ = y;
 }
 
 QRectF GraphBar::boundingRect() const{
     return QRectF(x_, y_, width_, height_);
 }
+
 QPainterPath GraphBar::shape() const{
     QPainterPath path;
     path.addRect(this->boundingRect());
@@ -24,4 +25,8 @@ void GraphBar::paint(QPainter *painter, const QStyleOptionGraphicsItem *item, QW
     painter->drawRect(this->boundingRect());
 
     painter->setBrush(b);
+}
+
+void GraphBar::RelocateBack(){
+    x_ -= 20;
 }

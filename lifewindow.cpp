@@ -34,9 +34,8 @@ LifeWindow::LifeWindow(QWidget *parent) :
     ui->turnLabel->setText("Turn: 0");
     ui->populationLabel->setText(life_board_.PopulationAsString());
 
-    GraphBar *g = new GraphBar(0, life_board_.PopulationAsPercent(), life_board_.PopulationAsPercent());
-
-    life_graph_view->addItem(g);
+    life_graph_.AddBar(life_board_.PopulationAsPercent());
+    PaintGraphBar(life_graph_.get_last_bar());
 }
 
 void LifeWindow::PaintLifeBoard(){
@@ -45,8 +44,25 @@ void LifeWindow::PaintLifeBoard(){
     }
 }
 
+void LifeWindow::PaintGraphBar(GraphBar *b){
+    life_graph_view->addItem(b);
+}
+
 void LifeWindow::on_stepButton_clicked(){
     life_board_.TakeStep();
+    GraphBar* to_delete = life_graph_.AddBar(life_board_.PopulationAsPercent());
+    if(to_delete != NULL){
+        delete to_delete;
+        for(GraphBar *b : life_graph_.get_graph_bars()){
+            if(b != life_graph_.get_last_bar()){
+                life_graph_view->removeItem(b);
+            }
+            life_graph_view->addItem(b);
+        }
+    }
+    else{
+        PaintGraphBar(life_graph_.get_last_bar());
+    }
     std::string s = "Turn: " + std::to_string(life_board_.get_turn());
     QString qs = s.c_str();
     ui->turnLabel->setText(qs);

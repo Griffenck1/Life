@@ -12,7 +12,11 @@ class GraphBar : public QObject, public QGraphicsItem {
     Q_OBJECT
 
     public:
-        GraphBar(int x, int y, int height);
+        GraphBar(int x, int y);
+
+        void RelocateBack();
+
+        QRectF negativeBoundingRect() const;
 
         QRectF boundingRect() const override;
         QPainterPath shape() const override;
