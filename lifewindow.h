@@ -27,7 +27,10 @@ private slots:
 
     void on_pauseButton_clicked();
 
+    void on_mapSizeButton_clicked();
+
     void SpeedSliderChanged();
+
 
 
 private:

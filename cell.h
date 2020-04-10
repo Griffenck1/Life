@@ -8,7 +8,7 @@ class Cell : public QObject, public QGraphicsItem {
     Q_OBJECT
 
     public:
-        Cell(int cell_state, const int x, const int y);
+        Cell(int cell_state, const int x, const int y, int width);
 
         int get_x() const {return x_;}
         int get_y() const {return y_;}
@@ -22,6 +22,7 @@ class Cell : public QObject, public QGraphicsItem {
 
         QRectF boundingRect() const override;
         QPainterPath shape() const override;
+        void Update() {update();}
 
         void Die();
         void Live();
@@ -42,7 +43,7 @@ class Cell : public QObject, public QGraphicsItem {
         int cell_state_;
         int next_cell_state_;
         QColor color_;
-        static const int width_ = 20;
+        int width_;
         std::vector<Cell*> neighbors_;
 
     protected:

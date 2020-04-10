@@ -2,12 +2,24 @@
 #include <string>
 
 LifeBoard::LifeBoard(){
+
+}
+
+LifeBoard::LifeBoard(bool large_map){
+    board_width_ = 40;
+    board_height_ = 20;
+    int cell_width = 20;
+    if(!large_map){
+        board_width_ = 20;
+        board_height_ = 10;
+        cell_width = 40;
+    }
     turn_ = 0;
-    for(int i = 0; i < 40; i++){
-        for(int j = 0; j < 20; j++){
+    for(int i = 0; i < board_width_; i++){
+        for(int j = 0; j < board_height_; j++){
             //determines the cells start state (alive or dead) with 50/50 odds
             int start_state = rand() % 2;
-            Cell *cell = new Cell(start_state, i*20, j*20);
+            Cell *cell = new Cell(start_state, i*cell_width, j*cell_width, cell_width);
             cells_.push_back(cell);
         }
     }
@@ -21,7 +33,7 @@ QString LifeBoard::PopulationAsString(){
             alive_count++;
         }
     }
-    return ("Population: " + std::to_string(alive_count) + " (" + std::to_string((alive_count*100)/800) + "%)").c_str();
+    return ("Population: " + std::to_string(alive_count) + " (" + std::to_string((alive_count*100)/(board_height_*board_width_)) + "%)").c_str();
 }
 
 int LifeBoard::PopulationAsPercent(){
@@ -31,30 +43,30 @@ int LifeBoard::PopulationAsPercent(){
             alive_count++;
         }
     }
-    return (alive_count*100)/800;
+    return (alive_count*100)/(board_height_*board_width_);
 }
 
 //Algorithm doesn't quite work right
 void LifeBoard::PopulateCellNeighbors(){
+    int board_size = board_width_*board_height_;
     int cell_index = 0;
     std::vector<Cell*> neighbors;
     for(Cell *c : cells_){
         neighbors = {};
-        neighbors.push_back(cells_[(((cell_index - 41)+800)%800)]);
-        neighbors.push_back(cells_[(((cell_index - 40)+800)%800)]);
-        neighbors.push_back(cells_[(((cell_index - 39)+800)%800)]);
-        neighbors.push_back(cells_[(((cell_index - 1)+800)%800)]);
-        neighbors.push_back(cells_[(((cell_index + 1)+800)%800)]);
-        neighbors.push_back(cells_[(((cell_index + 39)+800)%800)]);
-        neighbors.push_back(cells_[(((cell_index + 40)+800)%800)]);
-        neighbors.push_back(cells_[(((cell_index + 41)+800)%800)]);
-        cells_[cell_index]->set_neighbors(neighbors);
+        neighbors.push_back(cells_[(((cell_index - (board_width_ + 1))+board_size)%board_size)]);
+        neighbors.push_back(cells_[(((cell_index - (board_width_))+board_size)%board_size)]);
+        neighbors.push_back(cells_[(((cell_index - (board_width_ - 1))+board_size)%board_size)]);
+        neighbors.push_back(cells_[(((cell_index - 1)+board_size)%board_size)]);
+        neighbors.push_back(cells_[(((cell_index + 1)+board_size)%board_size)]);
+        neighbors.push_back(cells_[(((cell_index + (board_width_ - 1))+board_size)%board_size)]);
+        neighbors.push_back(cells_[(((cell_index + (board_width_))+board_size)%board_size)]);
+        neighbors.push_back(cells_[(((cell_index + (board_width_ + 1))+board_size)%board_size)]);
+        c->set_neighbors(neighbors);
         cell_index++;
     }
 }
 
 void LifeBoard::TakeStep(){
-    std::vector<Cell*> next_state;
     int live_neighbors;
     //Goes through cells, decides if they should live or die, then prepares them to live or die when the board siwtches
     for(Cell *c : cells_){
@@ -100,4 +112,10 @@ void LifeBoard::TakeStep(){
         }
     }
     turn_++;
+}
+
+void LifeBoard::UpdateAllCells(){
+    for(Cell *c : cells_){
+        c->update();
+    }
 }

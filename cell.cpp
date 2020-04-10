@@ -1,6 +1,6 @@
 #include "cell.h"
 
-Cell::Cell(int cell_state, const int x, const int y){
+Cell::Cell(int cell_state, const int x, const int y, int width){
     cell_state_ = cell_state;
     next_cell_state_ = cell_state;
     if(cell_state_ == 0){
@@ -11,6 +11,7 @@ Cell::Cell(int cell_state, const int x, const int y){
     }
     x_ = x;
     y_ = y;
+    width_ = width;
 }
 
 QRectF Cell::boundingRect() const {

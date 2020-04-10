@@ -12,6 +12,8 @@ LifeWindow::LifeWindow(QWidget *parent) :
     pause_ = false;
     slider_speed_ = 1000;
 
+    life_board_ = LifeBoard(true);
+
     float initial_speed = 1;
     std::string s = "Speed: " + std::to_string(initial_speed) + "x";
     QString qs = s.c_str();
@@ -62,6 +64,10 @@ void LifeWindow::PaintGraphBar(GraphBar *b){
 }
 
 void LifeWindow::CallStep(){
+    if(life_board_.get_turn() == 0){
+        ui->mapSizeButton->deleteLater();
+    }
+
     life_board_.TakeStep();
     GraphBar* to_delete = life_graph_.AddBar(life_board_.PopulationAsPercent());
     if(to_delete != NULL){
@@ -116,6 +122,21 @@ void LifeWindow::SpeedSliderChanged(){
     QString qs = s.c_str();
     ui->speedLabel->setText(qs);
 }
+
+void LifeWindow::on_mapSizeButton_clicked(){
+    qDebug() << "I work!";
+    if(life_board_.get_board_width() == 40){
+        ui->mapSizeButton->setText("Large Map");
+        life_board_ = LifeBoard(false);
+        PaintLifeBoard();
+    }
+    else{
+        ui->mapSizeButton->setText("Small Map");
+        life_board_ = LifeBoard(true);
+        PaintLifeBoard();
+    }
+}
+
 
 LifeWindow::~LifeWindow()
 {
