@@ -37,6 +37,7 @@ private:
     QGraphicsScene *life_board_view;
     QGraphicsScene *life_graph_view;
     bool pause_;
+    int slider_speed_;
 
     void PaintLifeBoard();
     void PaintGraphBar(GraphBar *b);

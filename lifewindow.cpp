@@ -10,6 +10,10 @@ LifeWindow::LifeWindow(QWidget *parent) :
     ui->setupUi(this);
 
     pause_ = false;
+    slider_speed_ = 1000;
+
+    ui->speedSlider->setMaximum(100);
+    ui->speedSlider->setMinimum(10);
 
     /**
     To avoid any confusion, life_board_view_ and life_board_view_local are used to display the board, life_board_
@@ -38,6 +42,8 @@ LifeWindow::LifeWindow(QWidget *parent) :
 
     life_graph_.AddBar(life_board_.PopulationAsPercent());
     PaintGraphBar(life_graph_.get_last_bar());
+
+    connect(ui->speedSlider, &QSlider::sliderReleased, this, &LifeWindow::SpeedSliderChanged);
 }
 
 void LifeWindow::PaintLifeBoard(){
@@ -79,7 +85,7 @@ void LifeWindow::CallStep(){
 
 void LifeWindow::Play(){
     if(!pause_){
-        QTimer::singleShot(1000, this, SLOT(Play()));
+        QTimer::singleShot(slider_speed_, this, SLOT(Play()));
         this->CallStep();
         pause_ = false;
     }
@@ -99,7 +105,11 @@ void LifeWindow::on_pauseButton_clicked(){
 }
 
 void LifeWindow::SpeedSliderChanged(){
-    qDebug() << " I changed!";
+    slider_speed_ = 10000/ui->speedSlider->value();
+    float speed = ui->speedSlider->value()/10.0;
+    std::string s = "Speed: " + std::to_string(speed) + "x";
+    QString qs = s.c_str();
+    ui->speedLabel->setText(qs);
 }
 
 LifeWindow::~LifeWindow()
