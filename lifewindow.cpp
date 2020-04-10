@@ -12,6 +12,11 @@ LifeWindow::LifeWindow(QWidget *parent) :
     pause_ = false;
     slider_speed_ = 1000;
 
+    float initial_speed = 1;
+    std::string s = "Speed: " + std::to_string(initial_speed) + "x";
+    QString qs = s.c_str();
+    ui->speedLabel->setText(qs);
+
     ui->speedSlider->setMaximum(100);
     ui->speedSlider->setMinimum(10);
 

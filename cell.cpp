@@ -55,3 +55,17 @@ void Cell::Live(){
     color_ = QColor(0, 255, 0);
     update();
 }
+
+void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event){
+    if(event->button() == Qt::LeftButton){
+        if(event->modifiers() == Qt::ShiftModifier){
+
+        }
+        else{
+            this->Live();
+        }
+    }
+    else if(event->button() == Qt::RightButton){
+        this->Die();
+    }
+}

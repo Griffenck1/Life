@@ -39,6 +39,9 @@ class Cell : public QObject, public QGraphicsItem {
         QColor color_;
         static const int width_ = 20;
         std::vector<Cell*> neighbors_;
+
+    protected:
+        void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
 };
 
 #endif // CELL_H
