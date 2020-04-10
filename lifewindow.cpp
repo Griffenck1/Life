@@ -9,6 +9,8 @@ LifeWindow::LifeWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    pause_ = false;
+
     /**
     To avoid any confusion, life_board_view_ and life_board_view_local are used to display the board, life_board_
     is the actual LifeBoard object
@@ -48,7 +50,7 @@ void LifeWindow::PaintGraphBar(GraphBar *b){
     life_graph_view->addItem(b);
 }
 
-void LifeWindow::on_stepButton_clicked(){
+void LifeWindow::CallStep(){
     life_board_.TakeStep();
     GraphBar* to_delete = life_graph_.AddBar(life_board_.PopulationAsPercent());
     if(to_delete != NULL){
@@ -73,6 +75,31 @@ void LifeWindow::on_stepButton_clicked(){
         //QString qs = s.c_str();
         //qDebug() << qs;
     //}
+}
+
+void LifeWindow::Play(){
+    if(!pause_){
+        QTimer::singleShot(1000, this, SLOT(Play()));
+        this->CallStep();
+        pause_ = false;
+    }
+}
+
+void LifeWindow::on_stepButton_clicked(){
+    this->CallStep();
+}
+
+void LifeWindow::on_playButton_clicked(){
+    pause_ = false;
+    this->Play();
+}
+
+void LifeWindow::on_pauseButton_clicked(){
+    pause_ = true;
+}
+
+void LifeWindow::SpeedSliderChanged(){
+    qDebug() << " I changed!";
 }
 
 LifeWindow::~LifeWindow()

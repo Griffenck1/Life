@@ -1120,7 +1120,7 @@
       </widget>
      </item>
      <item alignment="Qt::AlignTop">
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="playButton">
        <property name="palette">
         <palette>
          <active>
@@ -1218,7 +1218,7 @@
       </widget>
      </item>
      <item alignment="Qt::AlignTop">
-      <widget class="QPushButton" name="pushButton_3">
+      <widget class="QPushButton" name="pauseButton">
        <property name="palette">
         <palette>
          <active>
@@ -1410,7 +1410,7 @@
         </layout>
        </item>
        <item alignment="Qt::AlignTop">
-        <widget class="QSlider" name="horizontalSlider">
+        <widget class="QSlider" name="speedSlider">
          <property name="palette">
           <palette>
            <active>

@@ -19,7 +19,6 @@ void GraphBar::paint(QPainter *painter, const QStyleOptionGraphicsItem *item, QW
     Q_UNUSED(widget);
 
     QBrush b = painter->brush();
-
     painter->setBrush(QBrush(QColor(0, 255, 0)));
 
     painter->drawRect(this->boundingRect());

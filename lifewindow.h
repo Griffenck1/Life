@@ -16,8 +16,18 @@ public:
     explicit LifeWindow(QWidget *parent = 0);
     ~LifeWindow();
 
+    void CallStep();
+
 private slots:
+    void Play();
+
     void on_stepButton_clicked();
+
+    void on_playButton_clicked();
+
+    void on_pauseButton_clicked();
+
+    void SpeedSliderChanged();
 
 
 private:
@@ -26,6 +36,7 @@ private:
     LifeGraph life_graph_;
     QGraphicsScene *life_board_view;
     QGraphicsScene *life_graph_view;
+    bool pause_;
 
     void PaintLifeBoard();
     void PaintGraphBar(GraphBar *b);
