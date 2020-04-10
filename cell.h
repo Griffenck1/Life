@@ -25,15 +25,20 @@ class Cell : public QObject, public QGraphicsItem {
 
         void Die();
         void Live();
+        void BecomeInfected();
+        void Recover();
 
         void PrepareToDie();
         void PrepareToLive();
+        void PrepareToBecomeInfected();
+        void PrepareToRecover();
 
         void paint(QPainter *painter, const QStyleOptionGraphicsItem *item, QWidget *widget) override;
 
     private:
         int x_;
         int y_;
+        //0 = dead, 1 = alive, 2 = infected, 3 = recovered
         int cell_state_;
         int next_cell_state_;
         QColor color_;

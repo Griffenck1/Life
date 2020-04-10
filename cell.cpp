@@ -41,7 +41,20 @@ void Cell::PrepareToDie(){
 }
 
 void Cell::PrepareToLive(){
-    next_cell_state_ = 1;
+    if(cell_state_ == 0){
+        next_cell_state_ = 1;
+    }
+    else{
+        next_cell_state_ = cell_state_;
+    }
+}
+
+void Cell::PrepareToBecomeInfected(){
+    next_cell_state_ = 2;
+}
+
+void Cell::PrepareToRecover(){
+    next_cell_state_ = 3;
 }
 
 void Cell::Die(){
@@ -51,15 +64,29 @@ void Cell::Die(){
 }
 
 void Cell::Live(){
-    cell_state_ = 1;
-    color_ = QColor(0, 255, 0);
+    if(cell_state_ == 0){
+        cell_state_ = 1;
+        color_ = QColor(0, 255, 0);
+        update();
+    }
+}
+
+void Cell::BecomeInfected(){
+    cell_state_ = 2;
+    color_ = QColor(255, 0, 0);
+    update();
+}
+
+void Cell::Recover(){
+    cell_state_ = 3;
+    color_ = QColor(0, 0, 255);
     update();
 }
 
 void Cell::mousePressEvent(QGraphicsSceneMouseEvent *event){
     if(event->button() == Qt::LeftButton){
         if(event->modifiers() == Qt::ShiftModifier){
-
+            this->BecomeInfected();
         }
         else{
             this->Live();

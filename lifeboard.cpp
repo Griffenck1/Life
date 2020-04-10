@@ -58,26 +58,45 @@ void LifeBoard::TakeStep(){
     int live_neighbors;
     //Goes through cells, decides if they should live or die, then prepares them to live or die when the board siwtches
     for(Cell *c : cells_){
+        if(c->get_cell_state() == 2){
+            for(Cell *n : c->get_neighbors()){
+                if(n->get_cell_state() == 1){
+                    if((rand() % 100) < 5){
+                        n->PrepareToBecomeInfected();
+                    }
+                }
+            }
+            if((rand() % 100) < 10){
+                c->PrepareToRecover();
+            }
+        }
         live_neighbors = 0;
         for(Cell *n : c->get_neighbors()){
-            if(n->get_cell_state() == 1){
+            if(n->get_cell_state() != 0){
                 live_neighbors++;
             }
         }
-        if((c->get_cell_state() == 0) & (live_neighbors == 3)){
+        if(live_neighbors == 3){
             c->PrepareToLive();
         }
-        else if((c->get_cell_state() == 1) & ((live_neighbors > 3) | (live_neighbors < 2))){
+        else if((live_neighbors > 3) | (live_neighbors < 2)){
             c->PrepareToDie();
         }
     }
     //Goes through the cells after each of their fates has been decided, and changes them
     for(Cell *c : cells_){
-        if(c->get_next_cell_state() == 1){
+        if(c->get_next_cell_state() == 0){
+            c->Die();
+        }
+
+        else if(c->get_next_cell_state() == 1){
             c->Live();
         }
+        else if(c->get_next_cell_state() ==2){
+            c->BecomeInfected();
+        }
         else{
-            c->Die();
+            c->Recover();
         }
     }
     turn_++;
