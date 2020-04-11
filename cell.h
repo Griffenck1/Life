@@ -24,15 +24,15 @@ class Cell : public QObject, public QGraphicsItem {
         QPainterPath shape() const override;
         void Update() {update();}
 
-        void Die();
-        void Live();
-        void BecomeInfected();
-        void Recover();
-
         void PrepareToDie();
         void PrepareToLive();
         void PrepareToBecomeInfected();
         void PrepareToRecover();
+
+        void Die();
+        void Live();
+        void BecomeInfected();
+        void Recover();
 
         void paint(QPainter *painter, const QStyleOptionGraphicsItem *item, QWidget *widget) override;
 
