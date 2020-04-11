@@ -15,6 +15,9 @@ class LifeBoard{
         int get_board_width() const {return board_width_;}
         int get_board_height() const {return board_height_;}
 
+        std::tuple<int, int> twoDto3D(int i_2d);
+        int threeDto2D(std::tuple<int, int> coordinates);
+
         QString PopulationAsString();
 
         int PopulationAsPercent();
